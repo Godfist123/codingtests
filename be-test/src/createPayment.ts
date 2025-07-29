@@ -2,6 +2,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { buildResponse, parseInput } from "./lib/apigateway";
 import { createPayment, Payment } from "./lib/payments";
 import { randomUUID } from "crypto";
+import { z } from "zod";
 
 export const handler = async (
   event: APIGatewayProxyEvent

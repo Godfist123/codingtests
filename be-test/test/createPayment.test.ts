@@ -69,6 +69,122 @@ describe("When the user creates a payment", () => {
       id: generatedId, // Generated ID, not user's ID
     });
   });
+
+  it("should return 422 if the input is invalid - missing amount", async () => {
+    const invalidPayment = {
+      currency: "AUD",
+    };
+
+    const createPaymentMock = jest
+      .spyOn(payments, "createPayment")
+      .mockResolvedValueOnce();
+
+    const result = await handler({
+      body: JSON.stringify(invalidPayment),
+    } as unknown as APIGatewayProxyEvent);
+
+    expect(result.statusCode).toBe(422);
+    expect(JSON.parse(result.body)).toEqual({
+      error: "Invalid input",
+      details: expect.arrayContaining([
+        expect.objectContaining({
+          code: "invalid_type",
+          expected: "number",
+          received: "undefined",
+          path: ["amount"],
+        }),
+      ]),
+    });
+    expect(createPaymentMock).not.toHaveBeenCalled();
+  });
+
+  it("should return 422 if the input is invalid - negative amount", async () => {
+    const invalidPayment = {
+      amount: -100,
+      currency: "AUD",
+    };
+
+    const createPaymentMock = jest
+      .spyOn(payments, "createPayment")
+      .mockResolvedValueOnce();
+
+    const result = await handler({
+      body: JSON.stringify(invalidPayment),
+    } as unknown as APIGatewayProxyEvent);
+
+    expect(result.statusCode).toBe(422);
+    expect(JSON.parse(result.body)).toEqual({
+      error: "Invalid input",
+      details: expect.arrayContaining([
+        expect.objectContaining({
+          code: "too_small",
+          minimum: 0,
+          type: "number",
+          inclusive: false,
+          path: ["amount"],
+        }),
+      ]),
+    });
+    expect(createPaymentMock).not.toHaveBeenCalled();
+  });
+
+  it("should return 422 if the input is invalid - invalid currency format", async () => {
+    const invalidPayment = {
+      amount: 100,
+      currency: "AUDD", // Too long
+    };
+
+    const createPaymentMock = jest
+      .spyOn(payments, "createPayment")
+      .mockResolvedValueOnce();
+
+    const result = await handler({
+      body: JSON.stringify(invalidPayment),
+    } as unknown as APIGatewayProxyEvent);
+
+    expect(result.statusCode).toBe(422);
+    expect(JSON.parse(result.body)).toEqual({
+      error: "Invalid input",
+      details: expect.arrayContaining([
+        expect.objectContaining({
+          code: "too_big",
+          maximum: 3,
+          type: "string",
+          path: ["currency"],
+        }),
+      ]),
+    });
+    expect(createPaymentMock).not.toHaveBeenCalled();
+  });
+
+  it("should return 422 if the input is invalid - currency too short", async () => {
+    const invalidPayment = {
+      amount: 100,
+      currency: "AU", // Too short
+    };
+
+    const createPaymentMock = jest
+      .spyOn(payments, "createPayment")
+      .mockResolvedValueOnce();
+
+    const result = await handler({
+      body: JSON.stringify(invalidPayment),
+    } as unknown as APIGatewayProxyEvent);
+
+    expect(result.statusCode).toBe(422);
+    expect(JSON.parse(result.body)).toEqual({
+      error: "Invalid input",
+      details: expect.arrayContaining([
+        expect.objectContaining({
+          code: "too_small",
+          minimum: 3,
+          type: "string",
+          path: ["currency"],
+        }),
+      ]),
+    });
+    expect(createPaymentMock).not.toHaveBeenCalled();
+  });
 });
 
 afterEach(() => {
