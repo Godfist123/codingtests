@@ -1,0 +1,14 @@
+#container {
+    display: flex;
+    height: 100%;
+}
+
+#main {
+    flex: 1;
+    margin-left: 60px;
+    overflow-y: hidden;
+}
+
+#content {
+    height: 100%;
+}

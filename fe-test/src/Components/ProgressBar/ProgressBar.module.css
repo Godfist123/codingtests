@@ -1,0 +1,22 @@
+.base {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    background: #ffffff;
+    outline: 2px solid #123688;
+    border-radius: 20px;
+    height: 5px;
+    overflow: hidden;
+    max-width: 960px;
+}
+
+.progress {
+    overflow: hidden;
+    background-color: #123688;
+    border-radius: 20px;
+    width: 960px;
+    height: 5px;
+    transition: all 0.1s;
+    transform: translate(-1000px);
+}
