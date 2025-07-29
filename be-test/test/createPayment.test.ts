@@ -90,7 +90,6 @@ describe("When the user creates a payment", () => {
         expect.objectContaining({
           code: "invalid_type",
           expected: "number",
-          received: "undefined",
           path: ["amount"],
         }),
       ]),
@@ -119,7 +118,6 @@ describe("When the user creates a payment", () => {
         expect.objectContaining({
           code: "too_small",
           minimum: 0,
-          type: "number",
           inclusive: false,
           path: ["amount"],
         }),
@@ -149,7 +147,6 @@ describe("When the user creates a payment", () => {
         expect.objectContaining({
           code: "too_big",
           maximum: 3,
-          type: "string",
           path: ["currency"],
         }),
       ]),
@@ -178,7 +175,7 @@ describe("When the user creates a payment", () => {
         expect.objectContaining({
           code: "too_small",
           minimum: 3,
-          type: "string",
+          inclusive: true,
           path: ["currency"],
         }),
       ]),
