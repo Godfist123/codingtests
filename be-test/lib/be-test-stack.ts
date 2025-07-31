@@ -1,6 +1,6 @@
 import * as cdk from "aws-cdk-lib";
 import { Cors, LambdaIntegration, RestApi } from "aws-cdk-lib/aws-apigateway";
-import { AttributeType, Table } from "aws-cdk-lib/aws-dynamodb";
+import { AttributeType, ProjectionType, Table } from "aws-cdk-lib/aws-dynamodb";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Construct } from "constructs";
@@ -13,6 +13,12 @@ export class BeTestStack extends cdk.Stack {
     const paymentsTable = new Table(this, "PaymentsTable", {
       tableName: "PaymentsTable",
       partitionKey: { name: "paymentId", type: AttributeType.STRING },
+    });
+
+    paymentsTable.addGlobalSecondaryIndex({
+      indexName: "currencyIndex",
+      partitionKey: { name: "currency", type: AttributeType.STRING },
+      projectionType: ProjectionType.ALL,
     });
 
     // API

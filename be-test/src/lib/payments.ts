@@ -1,5 +1,10 @@
 import { DocumentClient } from "./dynamodb";
-import { GetCommand, PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
+import {
+  GetCommand,
+  PutCommand,
+  QueryCommand,
+  ScanCommand,
+} from "@aws-sdk/lib-dynamodb";
 
 export const getPayment = async (
   paymentId: string
@@ -21,6 +26,22 @@ export const listPayments = async (): Promise<Payment[]> => {
     })
   );
 
+  return (result.Items as Payment[]) || [];
+};
+
+export const listPaymentsByCurrency = async (
+  currency: string
+): Promise<Payment[]> => {
+  const result = await DocumentClient.send(
+    new QueryCommand({
+      TableName: "Payments",
+      IndexName: "currencyIndex",
+      KeyConditionExpression: "currency = :currency",
+      ExpressionAttributeValues: {
+        ":currency": currency,
+      },
+    })
+  );
   return (result.Items as Payment[]) || [];
 };
 

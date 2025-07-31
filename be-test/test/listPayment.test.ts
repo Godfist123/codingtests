@@ -69,7 +69,14 @@ describe("When the user request a list of payments", () => {
 
     expect(result.statusCode).toBe(400);
     expect(JSON.parse(result.body)).toEqual({
-      error: "Currency parameter cannot be empty",
+      error: "Invalid Input",
+      details: expect.arrayContaining([
+        expect.objectContaining({
+          code: "too_small",
+          message: "Currency must be 3 characters",
+          path: ["currency"],
+        }),
+      ]),
     });
     expect(listPaymentsByCurrencyMock).not.toHaveBeenCalled();
   });
@@ -89,8 +96,8 @@ describe("When the user request a list of payments", () => {
       error: "Invalid Input",
       details: expect.arrayContaining([
         expect.objectContaining({
-          code: "invalid_string",
-          message: "String must contain exactly 3 character(s)",
+          code: "too_big",
+          message: "Currency must be 3 characters",
           path: ["currency"],
         }),
       ]),
@@ -115,7 +122,7 @@ describe("When the user request a list of payments", () => {
       details: expect.arrayContaining([
         expect.objectContaining({
           code: "invalid_type",
-          message: "Expected type string, received number",
+          message: "Invalid input: expected string, received number",
           path: ["currency"],
         }),
       ]),
