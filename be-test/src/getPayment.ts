@@ -1,4 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import { buildResponse } from "./lib/apigateway";
 import { getPayment } from "./lib/payments";
 
 export const handler = async (
@@ -8,10 +9,7 @@ export const handler = async (
   const paymentId = event.pathParameters?.id;
 
   if (!paymentId) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: "Payment ID is required" }),
-    };
+    return buildResponse(400, { error: "Payment ID is required" });
   }
 
   try {
@@ -19,21 +17,12 @@ export const handler = async (
     const payment = await getPayment(paymentId);
 
     if (!payment) {
-      return {
-        statusCode: 404,
-        body: JSON.stringify({ error: "Payment not found" }),
-      };
+      return buildResponse(404, { error: "Payment not found" });
     }
 
     // Return the payment data to the user
-    return {
-      statusCode: 200,
-      body: JSON.stringify(payment),
-    };
+    return buildResponse(200, payment);
   } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "Internal server error" }),
-    };
+    return buildResponse(500, { error: "Internal server error" });
   }
 };

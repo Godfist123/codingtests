@@ -49,7 +49,11 @@ export const createPayment = async (payment: Payment) => {
   await DocumentClient.send(
     new PutCommand({
       TableName: "Payments",
-      Item: payment,
+      Item: {
+        paymentId: payment.id,
+        amount: payment.amount,
+        currency: payment.currency,
+      },
     })
   );
 };
