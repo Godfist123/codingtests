@@ -11,7 +11,7 @@ export const getPayment = async (
 ): Promise<Payment | null> => {
   const result = await DocumentClient.send(
     new GetCommand({
-      TableName: "Payments",
+      TableName: "PaymentsTable",
       Key: { paymentId },
     })
   );
@@ -22,7 +22,7 @@ export const getPayment = async (
 export const listPayments = async (): Promise<Payment[]> => {
   const result = await DocumentClient.send(
     new ScanCommand({
-      TableName: "Payments",
+      TableName: "PaymentsTable",
     })
   );
 
@@ -34,7 +34,7 @@ export const listPaymentsByCurrency = async (
 ): Promise<Payment[]> => {
   const result = await DocumentClient.send(
     new QueryCommand({
-      TableName: "Payments",
+      TableName: "PaymentsTable",
       IndexName: "currencyIndex",
       KeyConditionExpression: "currency = :currency",
       ExpressionAttributeValues: {
@@ -48,7 +48,7 @@ export const listPaymentsByCurrency = async (
 export const createPayment = async (payment: Payment) => {
   await DocumentClient.send(
     new PutCommand({
-      TableName: "Payments",
+      TableName: "PaymentsTable",
       Item: {
         paymentId: payment.id,
         amount: payment.amount,

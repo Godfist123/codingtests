@@ -6,6 +6,8 @@ import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Construct } from "constructs";
 
 export class BeTestStack extends cdk.Stack {
+  public readonly apiUrlOutput: cdk.CfnOutput;
+
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -13,6 +15,7 @@ export class BeTestStack extends cdk.Stack {
     const paymentsTable = new Table(this, "PaymentsTable", {
       tableName: "PaymentsTable",
       partitionKey: { name: "paymentId", type: AttributeType.STRING },
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
     paymentsTable.addGlobalSecondaryIndex({
@@ -30,6 +33,11 @@ export class BeTestStack extends cdk.Stack {
     });
     const paymentsResource = paymentsApi.root.addResource("payments");
     const specificPaymentResource = paymentsResource.addResource("{id}");
+
+    // Add this Output to get API URL after deploy
+    this.apiUrlOutput = new cdk.CfnOutput(this, "ApiUrl", {
+      value: paymentsApi.url,
+    });
 
     // Functions
     const createPaymentFunction = this.createLambda(

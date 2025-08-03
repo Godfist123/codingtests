@@ -1,0 +1,286 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "BeTestStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "BeTestStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "BeTestStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "BeTestStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/632e8de5f10b86d1f6342642b7d7fc47447f0e32af063ed7648495df55c94877.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "BeTestStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "BeTestStack.assets"
+      ],
+      "metadata": {
+        "/BeTestStack": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "Be aware that the NodeJS runtime of Node 16 will be deprecated by Lambda on June 12, 2024. Lambda runtimes Node 18 and higher include SDKv3 and not SDKv2. Updating your Lambda runtime will require bundling the SDK, or updating all SDK calls in your handler code to use SDKv3 (which is not a trivial update). Please account for this added complexity and update as soon as possible. [ack: aws-cdk-lib/aws-lambda-nodejs:runtimeUpdateSdkV2Breakage]",
+            "trace": [
+              "Annotations.addMessage (/Users/renpenghao/Desktop/work-place/codingtests/be-test/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1608)",
+              "Annotations.addWarningV2 (/Users/renpenghao/Desktop/work-place/codingtests/be-test/node_modules/aws-cdk-lib/core/lib/annotations.js:1:825)",
+              "new Bundling (/Users/renpenghao/Desktop/work-place/codingtests/be-test/node_modules/aws-cdk-lib/aws-lambda-nodejs/lib/bundling.js:1:2695)",
+              "Function.bundle (/Users/renpenghao/Desktop/work-place/codingtests/be-test/node_modules/aws-cdk-lib/aws-lambda-nodejs/lib/bundling.js:1:991)",
+              "new NodejsFunction (/Users/renpenghao/Desktop/work-place/codingtests/be-test/node_modules/aws-cdk-lib/aws-lambda-nodejs/lib/function.js:1:2171)",
+              "BeTestStack.createLambda (/Users/renpenghao/Desktop/work-place/codingtests/be-test/lib/be-test-stack.ts:75:12)",
+              "new BeTestStack (/Users/renpenghao/Desktop/work-place/codingtests/be-test/lib/be-test-stack.ts:43:40)",
+              "Object.<anonymous> (/Users/renpenghao/Desktop/work-place/codingtests/be-test/bin/be-test.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1364:14)",
+              "Module.m._compile (/Users/renpenghao/Desktop/work-place/codingtests/be-test/node_modules/ts-node/src/index.ts:1618:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1422:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/renpenghao/Desktop/work-place/codingtests/be-test/node_modules/ts-node/src/index.ts:1621:12)",
+              "Module.load (node:internal/modules/cjs/loader:1203:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:1019:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:128:12)",
+              "phase4 (/Users/renpenghao/Desktop/work-place/codingtests/be-test/node_modules/ts-node/src/bin.ts:649:14)",
+              "bootstrap (/Users/renpenghao/Desktop/work-place/codingtests/be-test/node_modules/ts-node/src/bin.ts:95:10)",
+              "main (/Users/renpenghao/Desktop/work-place/codingtests/be-test/node_modules/ts-node/src/bin.ts:55:10)",
+              "Object.<anonymous> (/Users/renpenghao/Desktop/work-place/codingtests/be-test/node_modules/ts-node/src/bin.ts:800:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1364:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1422:10)",
+              "Module.load (node:internal/modules/cjs/loader:1203:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:1019:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:128:12)",
+              "node:internal/main/run_main_module:28:49"
+            ]
+          }
+        ],
+        "/BeTestStack/PaymentsTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "PaymentsTable48A42630"
+            }
+          }
+        ],
+        "/BeTestStack/PaymentsTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PaymentsTable48A42630"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengeE1E1A2B2"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengeDeployment7A4F64659b51a442b8241cc4ffb35f981d905498"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengeDeploymentStageprod644E490B"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengeEndpoint95425592"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Default/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengeOPTIONSE23B07FB"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Default/payments/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengepayments3DA738F0"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Default/payments/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengepaymentsOPTIONS1EDD147C"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Default/payments/{id}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengepaymentsid6F6319C3"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Default/payments/{id}/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengepaymentsidOPTIONS12941348"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Default/payments/{id}/GET/ApiPermission.BeTestStackofxPaymentsChallengeC0616DF7.GET..payments.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengepaymentsidGETApiPermissionBeTestStackofxPaymentsChallengeC0616DF7GETpaymentsid9A13CCAC"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Default/payments/{id}/GET/ApiPermission.Test.BeTestStackofxPaymentsChallengeC0616DF7.GET..payments.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengepaymentsidGETApiPermissionTestBeTestStackofxPaymentsChallengeC0616DF7GETpaymentsid826C7FFC"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Default/payments/{id}/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengepaymentsidGET4C132451"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Default/payments/POST/ApiPermission.BeTestStackofxPaymentsChallengeC0616DF7.POST..payments": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengepaymentsPOSTApiPermissionBeTestStackofxPaymentsChallengeC0616DF7POSTpaymentsA95D9190"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Default/payments/POST/ApiPermission.Test.BeTestStackofxPaymentsChallengeC0616DF7.POST..payments": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengepaymentsPOSTApiPermissionTestBeTestStackofxPaymentsChallengeC0616DF7POSTpaymentsD3C188BF"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Default/payments/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengepaymentsPOST9BCECC47"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Default/payments/GET/ApiPermission.BeTestStackofxPaymentsChallengeC0616DF7.GET..payments": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengepaymentsGETApiPermissionBeTestStackofxPaymentsChallengeC0616DF7GETpayments208922BA"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Default/payments/GET/ApiPermission.Test.BeTestStackofxPaymentsChallengeC0616DF7.GET..payments": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengepaymentsGETApiPermissionTestBeTestStackofxPaymentsChallengeC0616DF7GETpaymentsD793CA70"
+          }
+        ],
+        "/BeTestStack/ofxPaymentsChallenge/Default/payments/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ofxPaymentsChallengepaymentsGET38134BB8"
+          }
+        ],
+        "/BeTestStack/ApiUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiUrl"
+          }
+        ],
+        "/BeTestStack/createPayment/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "createPaymentServiceRoleB832A4C9"
+          }
+        ],
+        "/BeTestStack/createPayment/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "createPaymentServiceRoleDefaultPolicy19444DA3"
+          }
+        ],
+        "/BeTestStack/createPayment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "createPaymentCA419C16"
+          }
+        ],
+        "/BeTestStack/getPayment/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "getPaymentServiceRoleECF41F02"
+          }
+        ],
+        "/BeTestStack/getPayment/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "getPaymentServiceRoleDefaultPolicy8AFC4E7C"
+          }
+        ],
+        "/BeTestStack/getPayment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "getPayment02A00B20"
+          }
+        ],
+        "/BeTestStack/listPayments/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "listPaymentsServiceRole1AE84C3F"
+          }
+        ],
+        "/BeTestStack/listPayments/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "listPaymentsServiceRoleDefaultPolicy8267BBF6"
+          }
+        ],
+        "/BeTestStack/listPayments/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "listPayments28D4DAE5"
+          }
+        ],
+        "/BeTestStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/BeTestStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/BeTestStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/BeTestStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "BeTestStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}
