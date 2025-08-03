@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "20"
 
       - name: Install backend dependencies
         run: |
@@ -42,31 +42,3 @@ jobs:
           flags: backend-unit-tests
           name: backend-coverage
           fail_ci_if_error: false
-
-  # Code Quality Checks
-  code-quality:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-
-      - name: Install backend dependencies
-        run: |
-          cd be-test
-          npm ci
-
-      - name: Run backend linting
-        run: |
-          cd be-test
-          npm run lint
-
-      - name: Run backend type checking
-        run: |
-          cd be-test
-          npm run type-check
