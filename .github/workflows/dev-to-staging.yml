@@ -18,9 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
-          cache: "npm"
-          cache-dependency-path: "be-test/package-lock.json"
+          node-version: "20"
 
       - name: Install backend dependencies
         run: |
@@ -44,9 +42,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
-          cache: "npm"
-          cache-dependency-path: "be-test/package-lock.json"
+          node-version: "20"
 
       - name: Install backend dependencies
         run: |
@@ -71,7 +67,7 @@ jobs:
           npm run test:integration
 
       - name: Upload test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: integration-test-results
