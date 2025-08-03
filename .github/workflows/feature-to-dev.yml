@@ -30,10 +30,10 @@ jobs:
           cd be-test
           npm run test:unit
 
-      - name: Run backend tests with coverage
+      - name: Run backend unit tests with coverage
         run: |
           cd be-test
-          npm run test:coverage
+          npm run test:unit:coverage
 
       - name: Upload coverage reports
         uses: codecov/codecov-action@v3
