@@ -11,6 +11,7 @@
     "test:unit": "jest --testPathIgnorePatterns=integration-test",
     "test:integration": "jest test/integration-test",
     "test:coverage": "jest --coverage",
+    "test:unit:coverage": "jest --testPathIgnorePatterns=integration-test --coverage",
     "cdk": "cdk",
     "deploy": "cdk deploy --require-approval=never"
   },
